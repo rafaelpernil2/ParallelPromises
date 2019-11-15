@@ -1,10 +1,9 @@
 import { expect } from 'chai';
 import 'mocha';
-import { IUntyped } from '../interfaces/i-untyped';
-import { DataUtil } from '../utils/data-util';
+import { customPromiseAll } from '../index';
 import { PromiseUtil } from '../utils/promise-util';
 
-describe('Initial test. The method DataUtil.customPromiseAll with a predefined set of dummy promises...', () => {
+describe('Initial test. The method customPromiseAll with a predefined set of dummy promises...', () => {
   it('should return the following object', async () => {
     const concurrentLimit = 3;
 
@@ -51,7 +50,7 @@ describe('Initial test. The method DataUtil.customPromiseAll with a predefined s
       }
     ];
     // try {
-    const result = await DataUtil.customPromiseAll(listOfPromises, concurrentLimit);
+    const result = await customPromiseAll(listOfPromises, concurrentLimit);
     const expectedResult = {
       GetSomething: { res: 'Finished' },
       DeleteSomething: { res: 'Finished' },

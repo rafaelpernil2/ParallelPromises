@@ -1,0 +1,17 @@
+{
+  "name": "mierdeando-js",
+  "version": "1.0.0",
+  "description": "Pruebas con JS y TS",
+  "main": "src/js/index.js",
+  "scripts": {
+    "start": "node src/js/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafael Pernil Bronchalo",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.12.7",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  }
+}

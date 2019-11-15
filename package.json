@@ -4,14 +4,22 @@
   "description": "Promise.all() with concurrency limit",
   "main": "src/js/index.js",
   "scripts": {
-    "start": "tsc && node src/js/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && npm test src/js/index.js",
+    "test": "mocha -r ts-node/register src/ts/tests/**/*.ts --timeout 50000"
   },
   "author": "Rafael Pernil Bronchalo",
   "license": "MIT",
   "devDependencies": {
+    "@types/chai": "^4.2.5",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "ts-node": "^8.5.2",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2"
+  },
+  "prettier": {
+    "printWidth": 180
   }
 }

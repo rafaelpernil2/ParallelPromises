@@ -8,6 +8,7 @@ PromiseUtil.generateRandomPromise = () => {
         return new Promise((resolve, reject) => {
             const time = Math.ceil(Math.random() * 10) * 1000;
             setTimeout(() => {
+                // console.log("Promise executed in " + time/1000 + " seconds");
                 resolve({ res: "Finished" });
             }, time);
         });

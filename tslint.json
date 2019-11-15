@@ -17,7 +17,15 @@
             [
                 "Function"
             ]
-        ]
+        ],
+        "trailing-comma": false,
+        "comment-format": false,
+        "eofline": false
     },
-    "rulesDirectory": []
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": [
+            "node_modules"
+        ]
+    }
 }

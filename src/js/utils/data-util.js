@@ -37,8 +37,9 @@ DataUtil.customPromiseAll = (promiseList, concurrentLimit) => __awaiter(void 0, 
     console.log(results);
     return results;
 });
-DataUtil.concurrentPromiseExecRec = (promise, promiseList, resultsObject) => {
+DataUtil.concurrentPromiseExecRec = (promise, promiseList, resultsObject) => __awaiter(void 0, void 0, void 0, function* () {
     let resultPromise;
+    let finalResult = {};
     const awaitingPromiseList = promiseList;
     if (promise && promise.function) {
         resultPromise = promise.function();
@@ -53,33 +54,32 @@ DataUtil.concurrentPromiseExecRec = (promise, promiseList, resultsObject) => {
     // Else, simply execute
     if (awaitingPromiseList.length) {
         // The next promise is loaded and removed from promiseList
-        resultPromise.then((result) => {
-            const nextPromise = awaitingPromiseList.shift();
-            console.log("\x1b[32m%s\x1b[0m", `EXECUTED: ${promise.name}`);
-            console.timeEnd(`${promise.name}`);
+        const nextPromise = awaitingPromiseList.shift();
+        const result = yield resultPromise;
+        console.log("\x1b[32m%s\x1b[0m", `EXECUTED: ${promise.name}`);
+        console.timeEnd(`${promise.name}`);
+        // Add property to resultsObject
+        resultsObject[promise.name] = result;
+        // If a next promise was provided successfully, it is queued
+        if (nextPromise) {
+            // Time logs
+            console.time(`${nextPromise.name}`);
+            console.log("\x1b[35m%s\x1b[0m", `QUEUED ${nextPromise.name} by ${promise.name}`);
+            console.timeLog(`${nextPromise.name}`);
             // Add property to resultsObject
             resultsObject[promise.name] = result;
-            // If a next promise was provided successfully, it is queued
-            if (nextPromise) {
-                // Time logs
-                console.time(`${nextPromise.name}`);
-                console.log("\x1b[35m%s\x1b[0m", `QUEUED ${nextPromise.name} by ${promise.name}`);
-                console.timeLog(`${nextPromise.name}`);
-                // Add property to resultsObject
-                resultsObject[promise.name] = result;
-                resultPromise = DataUtil.concurrentPromiseExecRec(nextPromise, awaitingPromiseList, resultsObject);
-            }
-        });
+            finalResult = DataUtil.concurrentPromiseExecRec(nextPromise, awaitingPromiseList, resultsObject);
+        }
     }
     else {
-        resultPromise.then((result) => {
-            console.log("\x1b[32m%s\x1b[0m", `EXECUTED: ${promise.name}`);
-            console.timeEnd(`${promise.name}`);
-            // Add property to resultsObject
-            resultsObject[promise.name] = result;
-            // console.log(resultsObject);
-        });
+        const result = yield resultPromise;
+        console.log("\x1b[32m%s\x1b[0m", `EXECUTED: ${promise.name}`);
+        console.timeEnd(`${promise.name}`);
+        // Add property to resultsObject
+        resultsObject[promise.name] = result;
+        // console.log(resultsObject);
+        finalResult = result;
     }
-    return resultPromise;
-};
+    return finalResult;
+});
 //# sourceMappingURL=data-util.js.map

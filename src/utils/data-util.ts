@@ -1,8 +1,8 @@
-import { ICustomPromise } from "../interfaces/i-custom-promise";
-import { IUntyped } from "../interfaces/i-untyped";
+import { ICustomPromise } from '../interfaces/i-custom-promise';
+import { IUntyped } from '../interfaces/i-untyped';
 
 export class DataUtil {
-  public static customPromiseAll = async (promiseList: ICustomPromise[], concurrentLimit?: number) => {
+  public static customPromiseAll = async (promiseList: ICustomPromise[], concurrentLimit?: number): Promise<IUntyped> => {
     const promisesInProgress = [];
     const results = {};
 
@@ -25,7 +25,7 @@ export class DataUtil {
     }
 
     return results;
-  }
+  };
 
   private static concurrentPromiseExecRec = async (customPromise: ICustomPromise, customPromiseList: ICustomPromise[], resultsObject: IUntyped): Promise<IUntyped> => {
     let promise;
@@ -35,7 +35,7 @@ export class DataUtil {
     if (customPromise && customPromise.function) {
       promise = customPromise.function();
     } else {
-      throw new Error("Cannot read function of promise");
+      throw new Error('Cannot read function of promise');
     }
 
     // If there any left promises to process...
@@ -61,5 +61,5 @@ export class DataUtil {
     }
 
     return result;
-  }
+  };
 }

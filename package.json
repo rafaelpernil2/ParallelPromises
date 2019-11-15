@@ -2,24 +2,50 @@
   "name": "paralellpromises-js",
   "version": "1.0.0",
   "description": "Promise.all() with concurrency limit",
-  "main": "src/js/index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "start": "tsc && npm test src/js/index.js",
-    "test": "mocha -r ts-node/register src/ts/tests/**/*.ts --timeout 50000"
+    "start": "tsc && npm test lib/index.js",
+    "build": "tsc",
+    "test": "mocha -r ts-node/register src/tests/**/*.ts --timeout 50000",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "format": "tslint  --fix -c tslint.json src/**/*.ts",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelpernil2/ParalellPromises.git"
   },
   "author": "Rafael Pernil Bronchalo",
   "license": "MIT",
+  "keywords": ["Promise","all","concurrent","paralell"],
+  "bugs": {
+    "url": "https://github.com/rafaelpernil2/ParalellPromises/issues"
+  },
+  "homepage": "https://github.com/rafaelpernil2/ParalellPromises#readme",
   "devDependencies": {
     "@types/chai": "^4.2.5",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.7",
     "chai": "^4.2.0",
     "mocha": "^6.2.2",
+    "prettier": "^1.19.1",
     "ts-node": "^8.5.2",
     "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.7.2"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "prettier": {
-    "printWidth": 180
+    "printWidth": 180,
+    "trailingComma": "none",
+    "singleQuote": true
   }
 }

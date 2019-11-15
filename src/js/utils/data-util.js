@@ -13,8 +13,8 @@ class DataUtil {
 }
 exports.DataUtil = DataUtil;
 DataUtil.customPromiseAll = (promiseList, concurrentLimit) => __awaiter(void 0, void 0, void 0, function* () {
-    let promisesInProgress = [];
-    let results = {};
+    const promisesInProgress = [];
+    const results = {};
     // Set concurrent limit if provided
     const execLimit = concurrentLimit ? concurrentLimit : promiseList.length;
     // We remove the initial promises are going to queue
@@ -32,7 +32,7 @@ DataUtil.customPromiseAll = (promiseList, concurrentLimit) => __awaiter(void 0, 
 });
 DataUtil.concurrentPromiseExecRec = (promise, promiseList, resultsObject) => {
     let fun;
-    let awaitingPromiseList = promiseList;
+    const awaitingPromiseList = promiseList;
     if (promise && promise.function) {
         fun = promise.function();
     }

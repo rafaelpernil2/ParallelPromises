@@ -1,10 +1,10 @@
 {
-  "name": "mierdeando-js",
+  "name": "paralellpromises-js",
   "version": "1.0.0",
-  "description": "Pruebas con JS y TS",
+  "description": "Promise.all() with concurrency limit",
   "main": "src/js/index.js",
   "scripts": {
-    "start": "node src/js/index.js",
+    "start": "tsc && node src/js/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rafael Pernil Bronchalo",

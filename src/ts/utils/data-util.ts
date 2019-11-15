@@ -1,8 +1,11 @@
+import { ICustomPromise } from "../interfaces/i-custom-promise";
+import { IUntyped } from "../interfaces/i-untyped";
+
 export class DataUtil {
 
-    public static customPromiseAll = async (promiseList: Array<{ name: string, function: () => Promise<any> }>, concurrentLimit?: number) => {
-        let promisesInProgress: any[] = [];
-        let results: any = {};
+    public static customPromiseAll = async (promiseList: Array<{ name: string, function: () => Promise<IUntyped> }>, concurrentLimit?: number) => {
+        const promisesInProgress = [];
+        const results = {};
 
         // Set concurrent limit if provided
         const execLimit = concurrentLimit ? concurrentLimit : promiseList.length;
@@ -21,12 +24,11 @@ export class DataUtil {
         }
 
         return results;
-    };
+    }
 
-
-    private static concurrentPromiseExecRec = (promise: { name: string, function: () => Promise<any> }, promiseList: Array<{ name: string, function: () => Promise<any> }>, resultsObject: any) => {
+    private static concurrentPromiseExecRec = (promise: ICustomPromise, promiseList: ICustomPromise[], resultsObject: IUntyped) => {
         let fun;
-        let awaitingPromiseList = promiseList
+        const awaitingPromiseList = promiseList;
 
         if (promise && promise.function) {
             fun = promise.function();
@@ -41,8 +43,7 @@ export class DataUtil {
         fun.then(() => {
             console.log("\x1b[32m%s\x1b[0m", `EXECUTED: ${promise.name}`);
             // console.timeEnd(`${promise.name}`);
-        })
-
+        });
 
         // If there any left promises to process...
         if (awaitingPromiseList.length) {

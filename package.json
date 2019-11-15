@@ -5,9 +5,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "start": "tsc && npm test lib/index.js",
-    "build": "tsc",
     "test": "mocha -r ts-node/register src/tests/**/*.ts --timeout 50000",
+    "build": "tsc",
     "lint": "tslint -c tslint.json src/**/*.ts",
     "format": "tslint  --fix -c tslint.json src/**/*.ts",
     "prepare": "npm run build",

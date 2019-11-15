@@ -55,7 +55,7 @@ describe('Initial test. The method customPromiseAll with a predefined set of dum
       GetSomething: { res: 'Finished' },
       DeleteSomething: { res: 'Finished' },
       UpdateSomething: { res: 'Finished' },
-      CreateSomething: { res: 'Finhflkjsdhflgjished' },
+      CreateSomething: { res: 'Finished' },
       LoadJSON: { res: 'Finished' },
       ExternalAPI2: { res: 'Finished' },
       LoadExternalLibraries: { res: 'Finished' },

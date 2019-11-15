@@ -1,4 +1,4 @@
-name: tslint
+name: ci
 
 on:
   push:
@@ -12,6 +12,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - name: Setup Node.js for use with actions
+        uses: actions/setup-node@v1.1.0
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - name: Test NPM module
+        run: npm test
       - name: TSLint checks
         uses: mooyoul/tslint-actions@v1.1.1
         with:

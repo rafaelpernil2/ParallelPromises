@@ -46,10 +46,4 @@ let listOfPromises = [
     },
 ]
 
-// Start timer
-// console.time("ConcurrentPromises");
-
 DataUtil.customPromiseAll(listOfPromises, concurrentLimit);
-
-// End timer
-// console.timeEnd("ConcurrentPromises");

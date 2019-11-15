@@ -45,9 +45,5 @@ let listOfPromises = [
         function: promise_util_1.PromiseUtil.generateRandomPromise()
     },
 ];
-// Start timer
-// console.time("ConcurrentPromises");
 data_util_1.DataUtil.customPromiseAll(listOfPromises, concurrentLimit);
-// End timer
-// console.timeEnd("ConcurrentPromises");
 //# sourceMappingURL=index.js.map

@@ -38,25 +38,21 @@ export class DataUtil {
       throw new Error('Cannot read function of promise');
     }
 
+    // Wait until promise ends
+    const promiseResult = await promise;
+    // Add property to resultsObject
+    resultsObject[customPromise.name] = promiseResult;
+
+
     // If there any left promises to process...
     if (awaitingPromiseList.length) {
       // The next promise is loaded and removed from promiseList and if it was provided successfully, it is queued
       const nextPromise = awaitingPromiseList.shift();
-      // Wait until promise ends
-      const promiseResult = await promise;
-      // Add property to resultsObject
-      resultsObject[customPromise.name] = promiseResult;
-
+     
       if (nextPromise) {
-        // Add property to resultsObject
-        resultsObject[customPromise.name] = promiseResult;
         result = DataUtil.concurrentPromiseExecRec(nextPromise, awaitingPromiseList, resultsObject);
       }
     } else {
-      const promiseResult = await promise;
-
-      // Add property to resultsObject
-      resultsObject[customPromise.name] = promiseResult;
       result = promiseResult;
     }
 

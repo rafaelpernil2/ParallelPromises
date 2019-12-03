@@ -47,7 +47,7 @@ const listOfPromises: ICustomPromise[] = [
       ...
       ]
 
-      customPromiseAll(listOfPromises, concurrentLimit).then((result)=>{
+      customPromiseAll(listOfPromises, concurrentLimit).then((result: IAnyObject)=>{
           console.log(result);
           //{ GetSomething: { Response: ... }, CreateSomething: "{ Id: 8 }", RefreshSomething: "OK" , ...}
           ...

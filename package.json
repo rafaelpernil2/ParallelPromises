@@ -1,6 +1,6 @@
 {
-  "name": "paralell-promises",
-  "version": "0.0.4",
+  "name": "parallel-promises",
+  "version": "1.0.0",
   "description": "Promise.all() with concurrency limit",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rafaelpernil2/ParalellPromises.git"
+    "url": "git+https://github.com/rafaelpernil2/ParallelPromises.git"
   },
   "author": "Rafael Pernil Bronchalo",
   "license": "MIT",
@@ -25,12 +25,12 @@
     "Promise",
     "all",
     "concurrent",
-    "paralell"
+    "parallel"
   ],
   "bugs": {
-    "url": "https://github.com/rafaelpernil2/ParalellPromises/issues"
+    "url": "https://github.com/rafaelpernil2/ParallelPromises/issues"
   },
-  "homepage": "https://github.com/rafaelpernil2/ParalellPromises#readme",
+  "homepage": "https://github.com/rafaelpernil2/ParallelPromises#readme",
   "devDependencies": {
     "@types/chai": "^4.2.5",
     "@types/mocha": "^5.2.7",

@@ -1,6 +1,6 @@
-# ParalellPromises
+# ParallelPromises
 
-In this project I explore the concept of paralell promises and implement a method for executing a list of promises with a determined concurency limit.
+In this project I explore the concept of parallel promises and implement a method for executing a list of promises with a determined concurency limit.
 This project is inspired by https://itnext.io/node-js-handling-asynchronous-operations-in-parallel-69679dfae3fc
 
 ## Table of Contents
@@ -14,14 +14,14 @@ This project is inspired by https://itnext.io/node-js-handling-asynchronous-oper
 
 Install it on your project
 ```Shell
-npm install --save paralell-promises
+npm install --save parallel-promises
 ```
 
 ## Usage
 **Usage with Typescript**
 
 ```typescript
-import { customPromiseAll } from 'paralell-promises';
+import { customPromiseAll } from 'parallel-promises';
 
 ...
 
@@ -57,7 +57,7 @@ const listOfPromises: ICustomPromise[] = [
 
 **Usage with Javascript**
 ```javascript
-const ParalellPromises = require('paralell-promises');
+const ParallelPromises = require('parallel-promises');
 
 ...
 
@@ -83,7 +83,7 @@ const listOfPromises = [
       ... 
       ]
 
-      ParalellPromises.customPromiseAll(listOfPromises, concurrentLimit).then((result: IAnyObject)=>{
+      ParallelPromises.customPromiseAll(listOfPromises, concurrentLimit).then((result: IAnyObject)=>{
           console.log(result);
           //{ GetSomething: { Response: ... }, CreateSomething: "{ Id: 8 }", RefreshSomething: "OK" , ...} 
           ...

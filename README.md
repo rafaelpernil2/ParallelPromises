@@ -1,6 +1,12 @@
 # ParallelPromises
 
-In this project I explore the concept of parallel promises and implement a method for executing a list of promises with a determined concurency limit.
+[![Actions Status](https://github.com/rafaelpernil2/ParallelPromises/workflows/ci/badge.svg)](https://github.com/rafaelpernil2/ParallelPromises/actions)
+[![npm version](https://badge.fury.io/js/parallel-promises.svg)](https://badge.fury.io/js/parallel-promises)
+[![](https://badgen.net/badge/icon/TypeScript?icon=typescript&label)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+ParallelPromises is an NPM package implemented in Typescript for executing a set of Promises with a given concurrency limit.
+
 This project is inspired by https://itnext.io/node-js-handling-asynchronous-operations-in-parallel-69679dfae3fc
 
 ## Table of Contents

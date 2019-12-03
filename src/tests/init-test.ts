@@ -80,23 +80,23 @@ describe('Concurrency limit test. Two executions of method customPromiseAll with
     const listOfPromises: ICustomPromise[] = [
       {
         name: 'GetSomething',
-        function: PromiseUtil.generateRandomPromise(1000),
+        function: PromiseUtil.generateRandomPromise(10),
         thisArg: undefined,
         args: [{ result: 'Result' }]
       },
       {
         name: 'CreateSomething',
-        function: PromiseUtil.generateRandomPromise(1000),
+        function: PromiseUtil.generateRandomPromise(10),
         thisArg: undefined,
         args: [{ result: 'Result' }, { result2: 'Result' }]
       },
       {
         name: 'DeleteSomething',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       },
       {
         name: 'UpdateSomething',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       },
       {
         name: 'ExternalAPI1',
@@ -116,7 +116,7 @@ describe('Concurrency limit test. Two executions of method customPromiseAll with
       },
       {
         name: 'LoadExternalLibraries',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       },
       {
         name: 'SendLog',

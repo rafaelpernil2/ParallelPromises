@@ -1,8 +1,8 @@
+import { IAnyObject } from '../interfaces/i-any-object';
 import { ICustomPromise } from '../interfaces/i-custom-promise';
-import { IUntyped } from '../interfaces/i-untyped';
 
 export class DataUtil {
-  public static customPromiseAll = async (promiseList: ICustomPromise[], concurrentLimit?: number): Promise<IUntyped> => {
+  public static customPromiseAll = async (promiseList: ICustomPromise[], concurrentLimit?: number): Promise<IAnyObject> => {
     const promisesInProgress = [];
     const results = {};
 
@@ -27,13 +27,17 @@ export class DataUtil {
     return results;
   };
 
-  private static concurrentPromiseExecRec = async (customPromise: ICustomPromise, customPromiseList: ICustomPromise[], resultsObject: IUntyped): Promise<IUntyped> => {
+  private static concurrentPromiseExecRec = async (customPromise: ICustomPromise, customPromiseList: ICustomPromise[], resultsObject: IAnyObject): Promise<IAnyObject> => {
     let promise;
-    let result = {} as Promise<IUntyped> | IUntyped;
+    let result = {} as Promise<IAnyObject> | IAnyObject;
     const awaitingPromiseList = customPromiseList;
+    let args = customPromise.args;
+    if (!args) {
+      args = [];
+    }
 
     if (customPromise && customPromise.function) {
-      promise = customPromise.function();
+      promise = customPromise.function.call(customPromise.thisArg, ...args);
     } else {
       throw new Error('Cannot read function of promise');
     }
@@ -43,12 +47,11 @@ export class DataUtil {
     // Add property to resultsObject
     resultsObject[customPromise.name] = promiseResult;
 
-
     // If there any left promises to process...
     if (awaitingPromiseList.length) {
       // The next promise is loaded and removed from promiseList and if it was provided successfully, it is queued
       const nextPromise = awaitingPromiseList.shift();
-     
+
       if (nextPromise) {
         result = DataUtil.concurrentPromiseExecRec(nextPromise, awaitingPromiseList, resultsObject);
       }

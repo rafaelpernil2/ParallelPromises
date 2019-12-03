@@ -80,7 +80,7 @@ describe('Concurrency limit test. Two executions of method customPromiseAll with
     const listOfPromises: ICustomPromise[] = [
       {
         name: 'GetSomething',
-        function: PromiseUtil.generateRandomPromise(10),
+        function: PromiseUtil.generateRandomPromise(1000),
         thisArg: undefined,
         args: [{ result: 'Result' }]
       },
@@ -116,7 +116,7 @@ describe('Concurrency limit test. Two executions of method customPromiseAll with
       },
       {
         name: 'LoadExternalLibraries',
-        function: PromiseUtil.generateRandomPromise(1000)
+        function: PromiseUtil.generateRandomPromise(100)
       },
       {
         name: 'SendLog',

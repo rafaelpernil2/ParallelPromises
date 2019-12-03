@@ -44,12 +44,12 @@ const listOfPromises: ICustomPromise[] = [
         name: 'RefreshSomething',
         function: this.updateSomething,
       },
-      ... 
+      ...
       ]
 
       customPromiseAll(listOfPromises, concurrentLimit).then((result)=>{
           console.log(result);
-          //{ GetSomething: { Response: ... }, CreateSomething: "{ Id: 8 }", RefreshSomething: "OK" , ...} 
+          //{ GetSomething: { Response: ... }, CreateSomething: "{ Id: 8 }", RefreshSomething: "OK" , ...}
           ...
           // do whatever you want
       });
@@ -80,12 +80,12 @@ const listOfPromises = [
         name: 'RefreshSomething',
         function: this.updateSomething,
       },
-      ... 
+      ...
       ]
 
-      ParallelPromises.customPromiseAll(listOfPromises, concurrentLimit).then((result: IAnyObject)=>{
+      ParallelPromises.customPromiseAll(listOfPromises, concurrentLimit).then((result)=>{
           console.log(result);
-          //{ GetSomething: { Response: ... }, CreateSomething: "{ Id: 8 }", RefreshSomething: "OK" , ...} 
+          //{ GetSomething: { Response: ... }, CreateSomething: "{ Id: 8 }", RefreshSomething: "OK" , ...}
           ...
           // do whatever you want
       });
@@ -96,7 +96,7 @@ There is no plan regarding contributions in this project
 ## Credits
 This NPM package has been developed by:
 
-**Rafael Pernil Bronchalo** - *Developer* 
+**Rafael Pernil Bronchalo** - *Developer*
 
 * [github/rafaelpernil2](https://github.com/rafaelpernil2)
 

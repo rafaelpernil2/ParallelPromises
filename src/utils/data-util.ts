@@ -6,8 +6,8 @@ export class DataUtil {
     const promisesInProgress = [];
     const results = {};
 
-    // Set concurrent limit if provided
-    const execLimit = concurrentLimit ? concurrentLimit : promiseList.length;
+    // Set concurrent limit if provided and make sure it is within the amount of promises to process
+    const execLimit = concurrentLimit && concurrentLimit <= promiseList.length ? concurrentLimit : promiseList.length;
 
     // We remove the initial promises are going to queue
     const awaitingPromises = promiseList.slice(execLimit, promiseList.length);

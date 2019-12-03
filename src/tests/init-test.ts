@@ -74,19 +74,19 @@ describe('Initial test. The method customPromiseAll with a predefined set of dum
 
 describe('Concurrency limit test. Two executions of method customPromiseAll with a common predefined set of dummy promises with different concurrency limits....', () => {
   it('should take more time to complete the first batch, the one with a lower concurrency limit', async () => {
-    const concurrentLimitFirst = 3;
+    const concurrentLimitFirst = 2;
     const concurrentLimitSecond = 9;
 
     const listOfPromises: ICustomPromise[] = [
       {
         name: 'GetSomething',
-        function: PromiseUtil.generateRandomPromise(100),
+        function: PromiseUtil.generateRandomPromise(10),
         thisArg: undefined,
         args: [{ result: 'Result' }]
       },
       {
         name: 'CreateSomething',
-        function: PromiseUtil.generateRandomPromise(100),
+        function: PromiseUtil.generateRandomPromise(1000),
         thisArg: undefined,
         args: [{ result: 'Result' }, { result2: 'Result' }]
       },
@@ -100,27 +100,27 @@ describe('Concurrency limit test. Two executions of method customPromiseAll with
       },
       {
         name: 'ExternalAPI1',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       },
       {
         name: 'ExternalAPI2',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       },
       {
         name: 'LoadJSON',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       },
       {
         name: 'LoadAuthCookie',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       },
       {
         name: 'LoadExternalLibraries',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(1000)
       },
       {
         name: 'SendLog',
-        function: PromiseUtil.generateRandomPromise(100)
+        function: PromiseUtil.generateRandomPromise(10)
       }
     ];
 

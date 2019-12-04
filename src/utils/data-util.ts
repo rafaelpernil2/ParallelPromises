@@ -31,16 +31,16 @@ export class DataUtil {
     let promise;
     let result = {} as Promise<IAnyObject> | IAnyObject;
     const awaitingPromiseList = customPromiseList;
-    let args = customPromise.args;
-    if (!args) {
-      args = [];
+    const args = customPromise.args ? customPromise.args : [];
+    
+
+    if (!customPromise || !customPromise.function) {
+      throw new Error('Cannot read function of promise');    
     }
 
-    if (customPromise && customPromise.function) {
-      promise = customPromise.function.call(customPromise.thisArg, ...args);
-    } else {
-      throw new Error('Cannot read function of promise');
-    }
+    // Call the function
+    promise = customPromise.function.call(customPromise.thisArg, ...args);
+
 
     // Wait until promise ends
     const promiseResult = await promise;

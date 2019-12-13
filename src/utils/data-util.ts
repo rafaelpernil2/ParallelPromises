@@ -32,15 +32,13 @@ export class DataUtil {
     let result = {} as Promise<IAnyObject> | IAnyObject;
     const awaitingPromiseList = customPromiseList;
     const args = customPromise.args ? customPromise.args : [];
-    
 
     if (!customPromise || !customPromise.function) {
-      throw new Error('Cannot read function of promise');    
+      throw new Error('Cannot read function of promise');
     }
 
     // Call the function
     promise = customPromise.function.call(customPromise.thisArg, ...args);
-
 
     // Wait until promise ends
     const promiseResult = await promise;

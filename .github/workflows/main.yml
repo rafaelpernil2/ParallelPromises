@@ -27,7 +27,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pattern: './src/**/*.ts'
-      - name: Automated Version Bump
-        uses: phips28/gh-action-bump-version@v5.0.16  
       - name: Publish package
         uses: mikeal/merge-release@v4.0.7

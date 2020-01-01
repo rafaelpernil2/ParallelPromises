@@ -1,6 +1,7 @@
 # ParallelPromises
 
 [![Actions Status](https://github.com/rafaelpernil2/ParallelPromises/workflows/ci/badge.svg)](https://github.com/rafaelpernil2/ParallelPromises/actions)
+[![BCH compliance](https://bettercodehub.com/edge/badge/rafaelpernil2/ParallelPromises?branch=master)](https://bettercodehub.com/)
 [![npm version](https://badge.fury.io/js/parallel-promises.svg)](https://badge.fury.io/js/parallel-promises)
 [![](https://badgen.net/badge/icon/TypeScript?icon=typescript&label)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

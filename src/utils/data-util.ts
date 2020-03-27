@@ -28,17 +28,16 @@ export class DataUtil {
   };
 
   private static concurrentPromiseExecRec = async (customPromise: ICustomPromise, customPromiseList: ICustomPromise[], resultsObject: IAnyObject): Promise<IAnyObject> => {
-    let promise;
     let result = {} as Promise<IAnyObject> | IAnyObject;
     const awaitingPromiseList = customPromiseList;
     const args = customPromise.args ? customPromise.args : [];
 
-    if (!customPromise || !customPromise.function) {
+    if (!customPromise || !customPromise.hasOwnProperty('function')) {
       throw new Error('Cannot read function of promise');
     }
 
     // Call the function
-    promise = customPromise.function.call(customPromise.thisArg, ...args);
+    const promise = customPromise.function.call(customPromise.thisArg, ...args);
 
     // Wait until promise ends
     const promiseResult = await promise;

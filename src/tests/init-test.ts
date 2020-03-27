@@ -4,7 +4,7 @@ import { ICustomPromise } from 'src/interfaces/i-custom-promise';
 import { customPromiseAll } from '../index';
 import { PromiseUtil } from '../utils/promise-util';
 
-const calcTotalTIme = (hrtime: number[]) => {
+const calcTotalTIme = (hrtime: number[]): number => {
   return hrtime[0] * 1e9 + hrtime[1];
 };
 
@@ -16,13 +16,13 @@ describe('Initial test. The method customPromiseAll with a predefined set of dum
       {
         name: 'GetSomething',
         function: PromiseUtil.generateRandomPromise(0),
-        thisArg: undefined,
+        thisArg: null,
         args: [{ result: 'Result' }]
       },
       {
         name: 'CreateSomething',
         function: PromiseUtil.generateRandomPromise(0),
-        thisArg: undefined,
+        thisArg: null,
         args: [{ result: 'Result' }, { result2: 'Result' }]
       },
       {
@@ -85,13 +85,13 @@ describe('Concurrency limit test. Two executions of method customPromiseAll with
       {
         name: 'GetSomething',
         function: PromiseUtil.generateRandomPromise(10),
-        thisArg: undefined,
+        thisArg: null,
         args: [{ result: 'Result' }]
       },
       {
         name: 'CreateSomething',
         function: PromiseUtil.generateRandomPromise(10),
-        thisArg: undefined,
+        thisArg: null,
         args: [{ result: 'Result' }, { result2: 'Result' }]
       },
       {

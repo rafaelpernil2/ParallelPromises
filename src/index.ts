@@ -5,3 +5,5 @@ import { DataUtil } from './utils/data-util';
 export const customPromiseAll = async (promiseList: ICustomPromise[], concurrentLimit?: number): Promise<IAnyObject> => {
   return DataUtil.customPromiseAll(promiseList, concurrentLimit);
 };
+
+export { ICustomPromise } from './interfaces/i-custom-promise';

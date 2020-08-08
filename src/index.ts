@@ -19,17 +19,22 @@ export async function customPromiseAll(promiseList: ICustomPromise[], concurrent
 }
 
 async function concurrentPromiseExecRec(data: { nextPromise: ICustomPromise; awaitingPromiseList: ICustomPromise[]; resultsObject: Record<string, unknown> }): Promise<unknown> {
-  let result = {} as Promise<Record<string, unknown>> | unknown;
   if (!data.nextPromise?.hasOwnProperty('function')) {
     throw new Error('Cannot read function of promise');
   }
-  result = await data.nextPromise.function.call(data.nextPromise.thisArg, ...(data.nextPromise?.args ?? []));
-  data.resultsObject[data.nextPromise.name] = result;
+  data.resultsObject[data.nextPromise.name] = await data.nextPromise.function.call(data.nextPromise.thisArg, ...(data.nextPromise?.args ?? []));
+  return checkNextPromise(data);
+}
+
+function checkNextPromise(data: { nextPromise: ICustomPromise; awaitingPromiseList: ICustomPromise[]; resultsObject: Record<string, unknown> }): unknown | Promise<unknown> {
+  let result;
   if (data.awaitingPromiseList.length) {
     const nextPromise = data.awaitingPromiseList.shift();
     if (nextPromise) {
       result = concurrentPromiseExecRec({ nextPromise, awaitingPromiseList: data.awaitingPromiseList, resultsObject: data.resultsObject });
     }
+  } else {
+    result = data.resultsObject[data.nextPromise.name];
   }
   return result;
 }

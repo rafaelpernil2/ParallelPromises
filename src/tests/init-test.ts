@@ -135,7 +135,29 @@ describe('Concurrency limit test. Two executions of method customPromiseAll with
     const tSecond0 = process.hrtime();
     await customPromiseAll(listOfPromises, concurrentLimitSecond);
     const tSecond1 = process.hrtime(tSecond0);
-
     expect(calcTotalTIme(tFirst1)).to.above(calcTotalTIme(tSecond1));
+  });
+  it('should take about "Math.floor(promiseAmount / concurrencyLimit) * time + remainder" to execute', async () => {
+    const concurrencyLimit = 8;
+    const promiseAmount = 10;
+    const time = 1; // In seconds
+    const listOfPromises: ICustomPromise[] = [];
+    for (let num = 0; num < promiseAmount; num++) {
+      listOfPromises.push({
+        name: `Test${num}`,
+        function: TestUtil.timeoutPromiseFunction(time * 1e3)
+      });
+    }
+
+    const timeStart = process.hrtime();
+    await customPromiseAll(listOfPromises, concurrencyLimit);
+    const timeEnd = process.hrtime(timeStart);
+
+    const execTime = Math.floor(calcTotalTIme(timeEnd) / 1e9);
+    const remainder = promiseAmount % concurrencyLimit > 0 ? time : 0;
+    const expectedTime = Math.floor(promiseAmount / concurrencyLimit) * time + remainder;
+
+    expect(concurrencyLimit).to.below(promiseAmount);
+    expect(execTime).to.eql(expectedTime);
   });
 });

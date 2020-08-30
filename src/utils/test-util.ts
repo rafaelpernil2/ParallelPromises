@@ -14,4 +14,6 @@ export class TestUtil {
       });
     };
   };
+
+  public static timeoutPromiseFunction = (time: number): (() => Promise<string>) => (): Promise<string> => new Promise(resolve => setTimeout(() => resolve('Done'), time));
 }

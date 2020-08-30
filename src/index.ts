@@ -1,5 +1,7 @@
 import { ICustomPromise } from './interfaces/i-custom-promise';
+import { ICustomPromiseData } from './interfaces/i-custom-promise-data';
 export { ICustomPromise } from './interfaces/i-custom-promise';
+
 /**
  * Executes an array of ICustomPromises with a limit of how many promises you want to exectue at each time
  * @param promiseList An array of custom promises
@@ -9,8 +11,9 @@ export async function customPromiseAll(promiseList: ICustomPromise[], concurrent
   const promisesInProgress = [];
   const resultsObject = {};
   const execLimit = concurrentLimit && concurrentLimit <= promiseList.length ? concurrentLimit : promiseList.length;
+  const awaitingPromiseList = promiseList.slice(execLimit);
   for (let index = 0; index < execLimit; index++) {
-    promisesInProgress.push(concurrentPromiseExecRec({ nextPromise: promiseList[index], awaitingPromiseList: promiseList.slice(execLimit), resultsObject }));
+    promisesInProgress.push(concurrentPromiseExecRec({ currentPromise: promiseList[index], awaitingPromiseList, resultsObject }));
   }
   for (const promise of promisesInProgress) {
     await promise;
@@ -18,23 +21,14 @@ export async function customPromiseAll(promiseList: ICustomPromise[], concurrent
   return resultsObject;
 }
 
-async function concurrentPromiseExecRec(data: { nextPromise: ICustomPromise; awaitingPromiseList: ICustomPromise[]; resultsObject: Record<string, unknown> }): Promise<unknown> {
-  if (!data.nextPromise?.hasOwnProperty('function')) {
+async function concurrentPromiseExecRec({ currentPromise, awaitingPromiseList, resultsObject }: ICustomPromiseData): Promise<unknown> {
+  if (!currentPromise?.hasOwnProperty('function')) {
     throw new Error('Cannot read function of promise');
   }
-  data.resultsObject[data.nextPromise.name] = await data.nextPromise.function.call(data.nextPromise.thisArg, ...(data.nextPromise?.args ?? []));
-  return checkNextPromise(data);
-}
-
-function checkNextPromise(data: { nextPromise: ICustomPromise; awaitingPromiseList: ICustomPromise[]; resultsObject: Record<string, unknown> }): unknown | Promise<unknown> {
-  let result;
-  if (data.awaitingPromiseList.length) {
-    const nextPromise = data.awaitingPromiseList.shift();
-    if (nextPromise) {
-      result = concurrentPromiseExecRec({ nextPromise, awaitingPromiseList: data.awaitingPromiseList, resultsObject: data.resultsObject });
-    }
-  } else {
-    result = data.resultsObject[data.nextPromise.name];
+  resultsObject[currentPromise.name] = await currentPromise.function.call(currentPromise.thisArg, ...(currentPromise?.args ?? []));
+  const nextPromise = awaitingPromiseList.shift();
+  if (!nextPromise) {
+    return;
   }
-  return result;
+  return concurrentPromiseExecRec({ currentPromise: nextPromise, awaitingPromiseList, resultsObject });
 }

@@ -21,16 +21,21 @@ export async function customPromiseAll(promiseList: ICustomPromise[], concurrent
 }
 
 async function concurrentPromiseExecRec({ currentPromise, awaitingPromiseList, resultsObject }: ICustomPromiseData): Promise<unknown> {
-  if (currentPromise.name == null) {
-    throw new Error(ERROR_MSG.NO_PROMISE_NAME);
-  }
-  if (typeof currentPromise.function !== 'function') {
-    throw new Error(ERROR_MSG.NO_PROMISE_FUNCTION);
-  }
+  checkCustomPromise(currentPromise);
   resultsObject[currentPromise.name] = await currentPromise.function.call(currentPromise.thisArg, ...(currentPromise.args ?? []));
   const nextPromise = awaitingPromiseList.shift();
   if (!nextPromise) {
     return;
   }
   return concurrentPromiseExecRec({ currentPromise: nextPromise, awaitingPromiseList, resultsObject });
+}
+
+function checkCustomPromise(customPromise: ICustomPromise): void {
+  if (!customPromise.hasOwnProperty('name')) {
+    throw new Error(ERROR_MSG.NO_PROMISE_NAME);
+  }
+  if (!customPromise.hasOwnProperty('function')) {
+    throw new Error(ERROR_MSG.NO_PROMISE_FUNCTION);
+  }
+  return;
 }

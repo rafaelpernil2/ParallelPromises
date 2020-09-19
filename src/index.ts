@@ -1,3 +1,4 @@
+import { ERROR_MSG } from './constants/error-messages';
 import { ICustomPromise } from './interfaces/i-custom-promise';
 import { ICustomPromiseData } from './interfaces/i-custom-promise-data';
 export { ICustomPromise } from './interfaces/i-custom-promise';
@@ -15,17 +16,18 @@ export async function customPromiseAll(promiseList: ICustomPromise[], concurrent
   for (let index = 0; index < execLimit; index++) {
     promisesInProgress.push(concurrentPromiseExecRec({ currentPromise: promiseList[index], awaitingPromiseList, resultsObject }));
   }
-  for (const promise of promisesInProgress) {
-    await promise;
-  }
+  await Promise.all(promisesInProgress);
   return resultsObject;
 }
 
 async function concurrentPromiseExecRec({ currentPromise, awaitingPromiseList, resultsObject }: ICustomPromiseData): Promise<unknown> {
-  if (!currentPromise?.hasOwnProperty('function')) {
-    throw new Error('Cannot read function of promise');
+  if (!currentPromise.hasOwnProperty('name')) {
+    throw new Error(ERROR_MSG.NO_PROMISE_NAME);
   }
-  resultsObject[currentPromise.name] = await currentPromise.function.call(currentPromise.thisArg, ...(currentPromise?.args ?? []));
+  if (!currentPromise.hasOwnProperty('function')) {
+    throw new Error(ERROR_MSG.NO_PROMISE_FUNCTION);
+  }
+  resultsObject[currentPromise.name] = await currentPromise.function.call(currentPromise.thisArg, ...(currentPromise.args ?? []));
   const nextPromise = awaitingPromiseList.shift();
   if (!nextPromise) {
     return;

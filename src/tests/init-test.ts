@@ -1,15 +1,57 @@
 import { expect } from 'chai';
 import 'mocha';
-import { ICustomPromise } from 'src/interfaces/i-custom-promise';
+import { ERROR_MSG } from '../constants/error-messages';
+import { ICustomPromise } from '../interfaces/i-custom-promise';
 import { customPromiseAll } from '../index';
 import { TestUtil } from '../utils/test-util';
 
 const calcTotalTIme = (hrtime: number[]): number => {
   return hrtime[0] * 1e9 + hrtime[1];
 };
+describe('Initial test. The method customPromiseAll with at least one custom promise WITHOUT "function" property', () => {
+  it(`should throw an error containing ${ERROR_MSG.NO_PROMISE_FUNCTION}`, async () => {
+    const listOfPromises: ICustomPromise[] = [
+      {
+        name: 'GetSomething',
+        function: TestUtil.generateRandomPromise(0),
+        thisArg: null,
+        args: [{ result: 'Result' }]
+      },
+      { name: 'Test' } as ICustomPromise
+    ];
+    let result;
+    try {
+      await customPromiseAll(listOfPromises);
+    } catch (error) {
+      result = error;
+    }
+    expect(result.message).to.eql(ERROR_MSG.NO_PROMISE_FUNCTION);
+  });
+});
 
-describe('Initial test. The method customPromiseAll with a predefined set of dummy promises...', () => {
-  it('should return the following object', async () => {
+describe('Initial test. The method customPromiseAll with at least one custom promise WITHOUT "name" property', () => {
+  it(`should throw an error containing ${ERROR_MSG.NO_PROMISE_NAME}`, async () => {
+    const listOfPromises: ICustomPromise[] = [
+      {
+        name: 'GetSomething',
+        function: TestUtil.generateRandomPromise(0),
+        thisArg: null,
+        args: [{ result: 'Result' }]
+      },
+      { function: TestUtil.generateRandomPromise(0) } as ICustomPromise
+    ];
+    let result;
+    try {
+      await customPromiseAll(listOfPromises);
+    } catch (error) {
+      result = error;
+    }
+    expect(result.message).to.eql(ERROR_MSG.NO_PROMISE_NAME);
+  });
+});
+
+describe('Initial test. The method customPromiseAll with a predefined set of dummy custom promises...', () => {
+  it('should return the an object with each resolved promise indexed by each custom promise "name" property', async () => {
     const concurrentLimit = 3;
 
     const listOfPromises: ICustomPromise[] = [

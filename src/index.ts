@@ -21,10 +21,10 @@ export async function customPromiseAll(promiseList: ICustomPromise[], concurrent
 }
 
 async function concurrentPromiseExecRec({ currentPromise, awaitingPromiseList, resultsObject }: ICustomPromiseData): Promise<unknown> {
-  if (!currentPromise.hasOwnProperty('name')) {
+  if (currentPromise.name == null) {
     throw new Error(ERROR_MSG.NO_PROMISE_NAME);
   }
-  if (!currentPromise.hasOwnProperty('function')) {
+  if (typeof currentPromise.function !== 'function') {
     throw new Error(ERROR_MSG.NO_PROMISE_FUNCTION);
   }
   resultsObject[currentPromise.name] = await currentPromise.function.call(currentPromise.thisArg, ...(currentPromise.args ?? []));

@@ -17,10 +17,11 @@ jobs:
           node-version: '10.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      - name: "Test and publish on NPM"
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - uses: mmarchini-oss/npm-otp-publish@v0
+        with:
+          npm_token: ${{ secrets.NPM_AUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_actor: ${{ github.actor }}
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v1.1.2
         with:

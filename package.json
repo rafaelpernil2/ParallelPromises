@@ -1,11 +1,11 @@
 {
   "name": "parallel-promises",
-  "version": "1.6.10",
+  "version": "1.6.11",
   "description": "Promise.all() with concurrency limit",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
+    "preinstall": "npx force-resolutions",
     "test": "mocha -r ts-node/register src/tests/**/*.ts --timeout 50000",
     "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
     "build": "tsc",

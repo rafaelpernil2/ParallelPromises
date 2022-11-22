@@ -2,7 +2,6 @@
 
 [![Actions Status](https://github.com/rafaelpernil2/ParallelPromises/workflows/ci/badge.svg)](https://github.com/rafaelpernil2/ParallelPromises/actions)
 [![Coverage Status](https://coveralls.io/repos/github/rafaelpernil2/ParallelPromises/badge.svg?branch=master)](https://coveralls.io/github/rafaelpernil2/ParallelPromises?branch=master)
-[![BCH compliance](https://bettercodehub.com/edge/badge/rafaelpernil2/ParallelPromises?branch=master)](https://bettercodehub.com/)
 [![npm version](https://badge.fury.io/js/parallel-promises.svg)](https://badge.fury.io/js/parallel-promises)
 [![](https://badgen.net/badge/icon/TypeScript?icon=typescript&label)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -12,6 +11,8 @@ ParallelPromises is an NPM package implemented in Typescript for executing a set
 This project is inspired by https://itnext.io/node-js-handling-asynchronous-operations-in-parallel-69679dfae3fc
 
 ## Table of Contents
+- [ParallelPromises](#parallelpromises)
+  - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Contributing](#contributing)

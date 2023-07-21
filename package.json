@@ -1,6 +1,6 @@
 {
   "name": "parallel-promises",
-  "version": "1.6.13",
+  "version": "1.6.14",
   "description": "Promise.all() with concurrency limit",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

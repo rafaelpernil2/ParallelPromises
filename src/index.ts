@@ -22,6 +22,7 @@ export async function customPromiseAll(promiseList: ICustomPromise[], concurrent
 
 async function concurrentPromiseExecRec({ currentPromise, awaitingPromiseList, resultsObject }: ICustomPromiseData): Promise<unknown> {
   checkCustomPromise(currentPromise);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   resultsObject[currentPromise.name] = await currentPromise.function.call(currentPromise.thisArg, ...(currentPromise.args ?? []));
   const nextPromise = awaitingPromiseList.shift();
   if (!nextPromise) {

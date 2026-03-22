@@ -25,7 +25,7 @@ describe('Initial test. The method customPromiseAll with at least one custom pro
     } catch (error) {
       result = error;
     }
-    expect(result.message).to.eql(ERROR_MSG.NO_PROMISE_FUNCTION);
+    expect((result as Error).message).to.eql(ERROR_MSG.NO_PROMISE_FUNCTION);
   });
 });
 
@@ -46,7 +46,7 @@ describe('Initial test. The method customPromiseAll with at least one custom pro
     } catch (error) {
       result = error;
     }
-    expect(result.message).to.eql(ERROR_MSG.NO_PROMISE_NAME);
+    expect((result as Error).message).to.eql(ERROR_MSG.NO_PROMISE_NAME);
   });
 });
 

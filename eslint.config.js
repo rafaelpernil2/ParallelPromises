@@ -1,0 +1,72 @@
+const tseslint = require("typescript-eslint");
+const eslintConfigPrettier = require("eslint-config-prettier");
+const eslintPluginPrettier = require("eslint-plugin-prettier/recommended");
+
+module.exports = tseslint.config(
+  {
+    ignores: ["lib/**", "node_modules/**"],
+  },
+  ...tseslint.configs.recommendedTypeChecked,
+  eslintConfigPrettier,
+  eslintPluginPrettier,
+  {
+    languageOptions: {
+      parserOptions: {
+        project: "tsconfig.json",
+        sourceType: "module",
+      },
+    },
+    rules: {
+      "@typescript-eslint/array-type": "error",
+      "@typescript-eslint/ban-types": "off",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-use-before-define": "off",
+      "@typescript-eslint/prefer-for-of": "error",
+      "@typescript-eslint/prefer-function-type": "error",
+      "@typescript-eslint/unified-signatures": "error",
+      "camelcase": "error",
+      "complexity": "off",
+      "constructor-super": "error",
+      "dot-notation": "error",
+      "eqeqeq": ["error", "smart"],
+      "guard-for-in": "error",
+      "id-denylist": [
+        "error",
+        "any",
+        "Number",
+        "number",
+        "String",
+        "string",
+        "Boolean",
+        "boolean",
+        "Undefined",
+        "undefined",
+      ],
+      "id-match": "error",
+      "max-classes-per-file": ["error", 1],
+      "max-len": ["error", { "code": 180 }],
+      "no-bitwise": "error",
+      "no-caller": "error",
+      "no-cond-assign": "error",
+      "no-console": "error",
+      "no-debugger": "error",
+      "no-empty": "error",
+      "no-eval": "error",
+      "no-fallthrough": "off",
+      "no-invalid-this": "off",
+      "no-new-wrappers": "error",
+      "no-shadow": ["error", { "hoist": "all" }],
+      "no-throw-literal": "error",
+      "no-undef-init": "error",
+      "no-underscore-dangle": "error",
+      "no-unsafe-finally": "error",
+      "no-unused-expressions": "error",
+      "no-unused-labels": "error",
+      "object-shorthand": "error",
+      "one-var": ["error", "never"],
+      "radix": "error",
+      "use-isnan": "error",
+      "prettier/prettier": "error",
+    },
+  }
+);
